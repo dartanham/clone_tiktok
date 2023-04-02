@@ -1,36 +1,51 @@
 
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Video from './pages/video';
+import db from './config/firebase';
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 
 
 function App() {
+
+
+  const [videos, setVideos] = useState([]);
+
+  async function getVideos () {
+      const videosCollection = collection(db, 'videos');
+      const videosSnapshot = await getDocs(videosCollection);
+      const videosList = videosSnapshot.docs.map(doc => doc.data());
+      setVideos(videosList);
+
+  }
+
+
+  useEffect(() => {
+      getVideos();
+  }, []);
+
+
+
   return (
     <div className="App">
       <div className="app__videos">
+
+      {videos.map((item) => {
+        return (
+          <Video
+            likes={item.likes}
+            shares={item.shares}
+            messages={item.messages}
+            name={item.name}
+            description={item.description}
+            music={item.music}
+            url={item.url}
+          />
+        )
+      }
         
-      <Video
-        likes={111}
-        shares={222}
-        messages={333}
-        name="Dartan"
-        description="Cat jogando"
-        music="Like a Boss"
-        url="https://poqlymuephttfsljdabn.supabase.co/storage/v1/object/public/jornadadev/bird.mp4"
-      />
-      <Video 
-        likes={444}
-        shares={555}
-        messages={666}
-        name="Dartanham"
-        description="Cat Brincando"
-        music="Boss a Boss"
-        url="https://poqlymuephttfsljdabn.supabase.co/storage/v1/object/public/jornadadev/brecker2.mp4"
-      />
-      <Video 
-        likes={777}
-        shares={888}
-        messages={999}
-      />
+      )}
+
      
       </div>
     </div>
