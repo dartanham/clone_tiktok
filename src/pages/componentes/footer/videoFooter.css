@@ -20,8 +20,8 @@
   }
   
   .videoFooter__icon{
-   border: none;
-   bottom: 100px;
+    border: none;
+    bottom: 100px;
   }
   
   .videoFooterMusic__text {
@@ -38,7 +38,7 @@
   .videoFooter__record {
     animation: spinTheRecord 3s linear infinite;
     position: absolute;
-    bottom: 40px;
+    bottom: 0px;
     right: 10px;
     height: 50px;
     filter: invert(1);
@@ -62,4 +62,11 @@
     }
   }
   
-  
+  @media screen and (max-width: 440px) {
+    .videoFooter {
+      bottom: 22%;
+    }
+    .videoFooterMusic__text{
+      width: 70%;
+    }
+  }

@@ -26,4 +26,4 @@ function VideoFooter({name, description, music}) {
 );
 }
 
-export default VideoFooter
+export default VideoFooter 
